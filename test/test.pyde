@@ -4,7 +4,7 @@ def setup():
     size(200, 200)
     
 def draw():
-    background(150, 100, 20)
+    background(200, 30, 120)
     hi.draw()
     press_square.draw()
     another.draw()
