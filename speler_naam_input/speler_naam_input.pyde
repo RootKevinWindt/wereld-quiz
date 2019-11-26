@@ -7,16 +7,16 @@ def setup():
     cp5 = ControlP5(this)
 
     speler1 = cp5.addTextfield("Speler 1").setPosition(20, 30).setSize(
-        200, 40).setFont(font).setFocus(True).setColor(color(240, 240, 240))
+        200, 40).setFont(font).setFocus(False).setColor(color(240, 240, 240))
 
     speler2 = cp5.addTextfield("Speler 2").setPosition(20, 120).setSize(
-        200, 40).setFont(font).setFocus(True).setColor(color(240, 240, 240))
+        200, 40).setFont(font).setFocus(False).setColor(color(240, 240, 240))
 
     speler3 = cp5.addTextfield("Speler 3").setPosition(20, 210).setSize(
-        200, 40).setFont(font).setFocus(True).setColor(color(240, 240, 240))
+        200, 40).setFont(font).setFocus(False).setColor(color(240, 240, 240))
     
     speler4 = cp5.addTextfield("Speler 4").setPosition(20, 300).setSize(
-        200, 40).setFont(font).setFocus(True).setColor(color(240, 240, 240))
+        200, 40).setFont(font).setFocus(False).setColor(color(240, 240, 240))
   
 def draw():
     background(200)
