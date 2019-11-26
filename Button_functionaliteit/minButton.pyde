@@ -22,7 +22,7 @@ def isMouseWithinSpace(x,y,w,h):
 def mousePressed():
     global points
     if isMouseWithinSpace(sizewidth / 2 - buttonwidth / 2, sizeheight / 2 - buttonheight / 2, buttonwidth, buttonheight ):
-        points = points -1
+        points = points - 1
         #What the button should do
     else:
         print("is not within space")
