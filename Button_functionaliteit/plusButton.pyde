@@ -11,6 +11,7 @@ def setup():
     cp5.addButton("+").setValue(0).setPosition(sizewidth / 2 - buttonwidth / 2, sizeheight / 2 - buttonheight / 2).setSize(buttonwidth,buttonheight)
     
 def draw():
+    global points
     background(255)
     fill(0)
     text(str(points), 50, 50)
