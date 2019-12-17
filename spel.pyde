@@ -1,7 +1,7 @@
 add_library('controlP5')
 
 def setup():
-    global cp5, a, b, c, d, e, f, g, h, na, za, OAQuestions, OAAnswers, oaButtonClicked, AFQuestions, AFAnswers, afButtonClicked, AZQuestions, AZAnswers, azButtonClicked, EUAnswers, EUQuestions, NAQuestions, EUButtonClicked, NAAnswers, SAQuestions, SAAnswers, eu, az, af, oa, pechIndex, naButtonClicked, SAButtonClicked, euButtonclicked, azButtonclicked, afButtonclicked, oaButtonclicked, buttonwidthCont, buttonheightCont, rand, DiceButtonClicked, QButtonClicked, PButtonClicked, diceSize, font, font2, font3, speler1, side, speler2, speler3, speler4, punten1, punten2, punten3 , punten4
+    global cp5, a, b, c, d, e, f, g, h, i, j, na, za, OAQuestions, OAAnswers, oaButtonClicked, AFQuestions, AFAnswers, afButtonClicked, AZQuestions, AZAnswers, azButtonClicked, EUAnswers, EUQuestions, NAQuestions, EUButtonClicked, NAAnswers, SAQuestions, SAAnswers, eu, az, af, oa, pechIndex, naButtonClicked, SAButtonClicked, euButtonclicked, azButtonclicked, afButtonclicked, oaButtonclicked, buttonwidthCont, buttonheightCont, rand, DiceButtonClicked, QButtonClicked, PButtonClicked, diceSize, font, font2, font3, speler1, side, speler2, speler3, speler4, punten1, punten2, punten3 , punten4, ScoreBordButtonClicked
     size(1280, 700)
     fill(0)
     background(240)
@@ -15,6 +15,7 @@ def setup():
     punten3 = 0
     punten4 = 0
     #Main menu buttons
+    ScoreBordButtonClicked = False
     DiceButtonClicked = False
     QButtonClicked = False
     PButtonClicked = False
@@ -53,6 +54,10 @@ def setup():
     g.getCaptionLabel().setFont(font4).setSize(35)
     h = cp5.addButton("Laat antwoord zien").setValue(0).setPosition(850, 600).setSize(330, 60)
     h.getCaptionLabel().setFont(font5).setSize(25)
+    i = cp5.addButton("Spel Starten").setValue(0).setPosition(455, 300).setSize(350, 125)
+    i.getCaptionLabel().setFont(font4).setSize(25)
+    j = cp5.addButton("Afsluiten").setValue(0).setPosition(455, 450).setSize(350, 125)
+    j.getCaptionLabel().setFont(font4).setSize(25)
     
     font3 = createFont("arrial", 30)
     buttonwidthCont = 400
@@ -203,273 +208,302 @@ def setup():
                 'Het Operagebouw',
                 'Zoet water']
 def draw():
-    global DiceButtonClicked, cp5, a, b, c, d, e, f, side, rand, naButtonClicked, SAButtonClicked, randNA, randSA, showAnswerAZ, randAZ, randAF, showAnswerAF, afButtonClicked
+    global DiceButtonClicked, cp5, a, b, c, d, e, f, g, i, j, na, za, eu, az, af, oa, h, side, rand, naButtonClicked, SAButtonClicked, randNA, randSA, showAnswerAZ, randAZ, randAF, showAnswerAF, afButtonClicked, ScoreBordButtonClicked, mousePressed, isMouseWithinSpace
     background(unhex("FFFFFF"))
-    fill(0)
-    textFont(font)
-    fill(240)
-    rect(250, 150, 200, 60) #speler 1
-    rect(250, 220, 200, 60) #speler 2
-    rect(250, 290, 200, 60) #speler 3
-    rect(250, 360, 200, 60) #speler 4
-    fill(0)
     textFont(font2)
-    text(str("Scorebord"), width / 2 - 190 , 90)
-    textFont(font)
-    text(str("speler1"), 270, 190)
-    text(str("Punten:"), 570, 190)
-    text(str(punten1), 695, 190)
-    text(str("speler2"), 270, 260)
-    text(str("Punten:"), 570, 260)
-    text(str(punten2), 695, 260)
-    text(str("speler3"), 270, 330)
-    text(str("Punten:"), 570, 330)
-    text(str(punten3), 695, 330)
-    text(str("speler4"), 270, 400)
-    text(str("Punten:"), 570, 400)
-    text(str(punten4), 695, 400)
-# + buttons in volgorde
-    fill(200)
-    rect(740, 160, 45, 45, 7)
-    rect(740, 230, 45, 45, 7)
-    rect(740, 300, 45, 45, 7)
-    rect(740, 370, 45, 45, 7)
-# - buttons in volgorde
-    rect(800, 160, 45, 45, 7)
-    rect(800, 230, 45, 45, 7)
-    rect(800, 300, 45, 45, 7)
-    rect(800, 370, 45, 45, 7)
-    fill(0)
-    text(str("+"), 754, 193)
-    text(str("+"), 754, 263)
-    text(str("+"), 754, 333)
-    text(str("+"), 754, 403)
-    text(str("-"), 817, 191)
-    text(str("-"), 817, 261)
-    text(str("-"), 817, 331)
-    text(str("-"), 817, 401)
-    global DiceButtonClicked, cp5, a, b, c, d, e, f, na, za, eu, az, af, oa, side, naButtonClicked, randNA, showAnswer, NAAnswers, EUButtonClicked, azButtonClicked, showAnswerAZ, oaButtonClicked
-    if DiceButtonClicked == True:
-        # dice screen
+    text(str("De Grote Wereld Quiz"), width / 2 - 400 , 120)
+    a.setVisible(False)
+    b.setVisible(False)
+    c.setVisible(False)
+    d.setVisible(False)
+    e.setVisible(False)
+    f.setVisible(False)
+    g.setVisible(False)
+    na.setVisible(False)
+    za.setVisible(False)
+    eu.setVisible(False)
+    az.setVisible(False)
+    af.setVisible(False)
+    oa.setVisible(False)
+    h.setVisible(False)
+    j.setVisible(True)
+    
+    if ScoreBordButtonClicked == True:
         background(unhex("FFFFFF"))
-        a.setVisible(False)
-        b.setVisible(False)
-        c.setVisible(False)
-        d.setVisible(False)
-        e.setVisible(True)
-        f.setVisible(False)
-        g.setVisible(False)
-        na.setVisible(False)
-        za.setVisible(False)
-        eu.setVisible(False)
-        az.setVisible(False)
-        af.setVisible(False)
-        oa.setVisible(False)
-        h.setVisible(False)
-        global diceSize
-        background(unhex("FFFFFF"))
-        text(str(side), width / 2, height / 2)
-    elif QButtonClicked == True:
-        # question screen
-        background(unhex("FFFFFF"))
-        a.setVisible(False)
-        b.setVisible(False)
-        c.setVisible(False)
-        d.setVisible(False)
-        e.setVisible(False)
-        f.setVisible(True)
-        g.setVisible(False)
-        na.setVisible(True)
-        za.setVisible(True)
-        eu.setVisible(True)
-        az.setVisible(True)
-        af.setVisible(True)
-        oa.setVisible(True)
-        h.setVisible(True)
-        text(str("Kies een continent:"), 75, 50)
-        text(str("Vragen kaart:"), width/2 + 210, 90)
-        fill(unhex("FFFFF"))
-        rect(850, 120, 330, 450, 10)
-        if naButtonClicked == True:
-            fill(0)
-            text(NAQuestions[randNA], 850, 120, 330, 450)
-            SAButtonClicked = False
-            EUButtonClicked = False
-            azButtonClicked = False
-            afButtonClicked = False
-            oaButtonClicked = False
-        if showAnswerNA == True:
-            naButtonClicked = False
-            SAButtonClicked = False
-            EUButtonClicked = False
-            azButtonClicked = False
-            afButtonClicked = False
-            oaButtonClicked = False
-            fill(0)
-            text(NAAnswers[randNA], 850, 120, 330, 450)
-        if SAButtonClicked == True:
-            fill(0)
-            text(SAQuestions[randSA], 850, 120, 330, 450)
-            naButtonClicked = False
-            EUButtonClicked = False
-            azButtonClicked = False
-            afButtonClicked = False
-            oaButtonClicked = False
-        if showAnswerSA == True:
-            SAButtonClicked = False
-            naButtonClicked = False
-            EUButtonClicked = False
-            azButtonClicked = False
-            afButtonClicked = False
-            oaButtonClicked = False
-            fill(0)
-            text(SAAnswers[randSA], 850, 120, 330, 450)
-        if EUButtonClicked == True:
-            fill(0)
-            text(EUQuestions[randEU], 850, 120, 330, 450)
-            naButtonClicked = False
-            SAButtonClicked = False
-            azButtonClicked = False
-            afButtonClicked = False
-            oaButtonClicked = False
-        if showAnswerEU == True:
-            SAButtonClicked = False
-            naButtonClicked = False
-            EUButtonClicked = False
-            azButtonClicked = False
-            afButtonClicked = False
-            oaButtonClicked = False
-            fill(0)
-            text(EUAnswers[randEU], 850, 120, 330, 450)
-        if azButtonClicked == True:
-            fill(0)
-            text(AZQuestions[randAZ], 850, 120, 330, 450)
-            naButtonClicked = False
-            SAButtonClicked = False
-            EUButtonClicked = False
-            afButtonClicked = False
-            oaButtonClicked = False
-        if showAnswerAZ == True:
-            SAButtonClicked = False
-            naButtonClicked = False
-            EUButtonClicked = False
-            azButtonClicked = False
-            afButtonClicked = False
-            oaButtonClicked = False
-            fill(0)
-            text(AZAnswers[randAZ], 850, 120, 330, 450)
-        if afButtonClicked == True:
-            fill(0)
-            text(AFQuestions[randAF], 850, 120, 330, 450)
-            naButtonClicked = False
-            SAButtonClicked = False
-            EUButtonClicked = False
-            azButtonClicked = False
-            oaButtonClicked = False
-        if showAnswerAF == True:
-            SAButtonClicked = False
-            naButtonClicked = False
-            EUButtonClicked = False
-            azButtonClicked = False
-            afButtonClicked = False
-            oaButtonClicked = False
-            fill(0)
-            text(AFAnswers[randAF], 850, 120, 330, 450)
-        if oaButtonClicked == True:
-            fill(0)
-            text(OAQuestions[randOA], 850, 120, 330, 450)
-            naButtonClicked = False
-            SAButtonClicked = False
-            EUButtonClicked = False
-            azButtonClicked = False
-            afButtonClicked = False
-        if showAnswerOA == True:
-            SAButtonClicked = False
-            naButtonClicked = False
-            EUButtonClicked = False
-            azButtonClicked = False
-            afButtonClicked = False
-            oaButtonClicked = False
-            fill(0)
-            text(OAAnswers[randOA], 850, 120, 330, 450)
-        
-    elif PButtonClicked == True:
-        # pech kaart screen
-        background(unhex("FFFFFF"))
-        a.setVisible(False)
-        b.setVisible(False)
-        c.setVisible(False)
-        d.setVisible(False)
-        e.setVisible(False)
-        f.setVisible(False)
-        g.setVisible(True)
-        na.setVisible(False)
-        za.setVisible(False)
-        eu.setVisible(False)
-        az.setVisible(False)
-        af.setVisible(False)
-        oa.setVisible(False)
-        h.setVisible(False)
-        text(pechIndex[rand], 510, height / 2 - 60, 300, 450)
-        text(str("Pech kaart"), width/2 - 95, 90)
-        fill(unhex("FFFFF"))
-        rect(490, 120, 330, 450, 10)
-        
-    else:
-        #Main screen
-        a.setVisible(True)
-        b.setVisible(True)
-        c.setVisible(True)
-        d.setVisible(True)
-        e.setVisible(False)
-        f.setVisible(False)
-        g.setVisible(False)
-        na.setVisible(False)
-        za.setVisible(False)
-        eu.setVisible(False)
-        az.setVisible(False)
-        af.setVisible(False)
-        oa.setVisible(False)
-        h.setVisible(False)
-        if mousePressed:
-            # spel afsluiten func.
-            if isMouseWithinSpace(455, 500, 350, 125):
-                DiceButtonPressed = False
-            if isMouseWithinSpace(1050, 30, 200, 70):
-                exit()
-    if punten1 == 10 or punten2 == 10 or punten3 == 10 or punten4 == 10:
-        #winnaarsscherm
-        background(unhex("FFFFFF"))
-        a.setVisible(False)
-        b.setVisible(False)
-        c.setVisible(False)
-        d.setVisible(True)
-        e.setVisible(False)
-        f.setVisible(False)
-        g.setVisible(False)
-        na.setVisible(False)
-        za.setVisible(False)
-        eu.setVisible(False)
-        az.setVisible(False)
-        af.setVisible(False)
-        h.setVisible(False)
-        
-        oa.setVisible(False)
-        if punten1 == 10:
-            text("Speler 1 heeft gewonnen!", width / 2 - 150, height / 2)
-        elif punten2 == 10:
-            text("Speler 2 heeft gewonnen!", width / 2 - 150, height / 2)
-        elif punten3 == 10:
-            text("Speler 3 heeft gewonnen!", width / 2 - 150, height / 2)
-        elif punten4 == 10:
-            text("Speler 4 heeft gewonnen!", width / 2 - 150, height / 2)
+        fill(0)
+        textFont(font)
+        fill(240)
+        rect(250, 150, 200, 60) #speler 1
+        rect(250, 220, 200, 60) #speler 2
+        rect(250, 290, 200, 60) #speler 3
+        rect(250, 360, 200, 60) #speler 4
+        fill(0)
+        textFont(font2)
+        text(str("Scorebord"), width / 2 - 190 , 90)
+        textFont(font)
+        text(str("speler1"), 270, 190)
+        text(str("Punten:"), 570, 190)
+        text(str(punten1), 695, 190)
+        text(str("speler2"), 270, 260)
+        text(str("Punten:"), 570, 260)
+        text(str(punten2), 695, 260)
+        text(str("speler3"), 270, 330)
+        text(str("Punten:"), 570, 330)
+        text(str(punten3), 695, 330)
+        text(str("speler4"), 270, 400)
+        text(str("Punten:"), 570, 400)
+        text(str(punten4), 695, 400)
+        # + buttons in volgorde
+        fill(200)
+        rect(740, 160, 45, 45, 7)
+        rect(740, 230, 45, 45, 7)
+        rect(740, 300, 45, 45, 7)
+        rect(740, 370, 45, 45, 7)
+        # - buttons in volgorde
+        rect(800, 160, 45, 45, 7)
+        rect(800, 230, 45, 45, 7)
+        rect(800, 300, 45, 45, 7)
+        rect(800, 370, 45, 45, 7)
+        fill(0)
+        text(str("+"), 754, 193)
+        text(str("+"), 754, 263)
+        text(str("+"), 754, 333)
+        text(str("+"), 754, 403)
+        text(str("-"), 817, 191)
+        text(str("-"), 817, 261)
+        text(str("-"), 817, 331)
+        text(str("-"), 817, 401)
+        global DiceButtonClicked, cp5, a, b, c, d, e, f, na, za, eu, az, af, oa, side, naButtonClicked, randNA, showAnswer, NAAnswers, EUButtonClicked, azButtonClicked, showAnswerAZ, oaButtonClicked, i
+        if DiceButtonClicked == True:
+            # dice screen
+            background(unhex("FFFFFF"))
+            a.setVisible(False)
+            b.setVisible(False)
+            c.setVisible(False)
+            d.setVisible(False)
+            e.setVisible(True)
+            f.setVisible(False)
+            g.setVisible(False)
+            na.setVisible(False)
+            za.setVisible(False)
+            eu.setVisible(False)
+            az.setVisible(False)
+            af.setVisible(False)
+            oa.setVisible(False)
+            h.setVisible(False)
+            i.setVisible(False)
+            j.setVisible(False)
+            global diceSize
+            background(unhex("FFFFFF"))
+            text(str(side), width / 2, height / 2)
+        elif QButtonClicked == True:
+            # question screen
+            background(unhex("FFFFFF"))
+            a.setVisible(False)
+            b.setVisible(False)
+            c.setVisible(False)
+            d.setVisible(False)
+            e.setVisible(False)
+            f.setVisible(True)
+            g.setVisible(False)
+            na.setVisible(True)
+            za.setVisible(True)
+            eu.setVisible(True)
+            az.setVisible(True)
+            af.setVisible(True)
+            oa.setVisible(True)
+            h.setVisible(True)
+            i.setVisible(False)
+            j.setVisible(False)
+            text(str("Kies een continent:"), 75, 50)
+            text(str("Vragen kaart:"), width/2 + 210, 90)
+            fill(unhex("FFFFF"))
+            rect(850, 120, 330, 450, 10)
+            if naButtonClicked == True:
+                fill(0)
+                text(NAQuestions[randNA], 850, 120, 330, 450)
+                SAButtonClicked = False
+                EUButtonClicked = False
+                azButtonClicked = False
+                afButtonClicked = False
+                oaButtonClicked = False
+            if showAnswerNA == True:
+                naButtonClicked = False
+                SAButtonClicked = False
+                EUButtonClicked = False
+                azButtonClicked = False
+                afButtonClicked = False
+                oaButtonClicked = False
+                fill(0)
+                text(NAAnswers[randNA], 850, 120, 330, 450)
+            if SAButtonClicked == True:
+                fill(0)
+                text(SAQuestions[randSA], 850, 120, 330, 450)
+                naButtonClicked = False
+                EUButtonClicked = False
+                azButtonClicked = False
+                afButtonClicked = False
+                oaButtonClicked = False
+            if showAnswerSA == True:
+                SAButtonClicked = False
+                naButtonClicked = False
+                EUButtonClicked = False
+                azButtonClicked = False
+                afButtonClicked = False
+                oaButtonClicked = False
+                fill(0)
+                text(SAAnswers[randSA], 850, 120, 330, 450)
+            if EUButtonClicked == True:
+                fill(0)
+                text(EUQuestions[randEU], 850, 120, 330, 450)
+                naButtonClicked = False
+                SAButtonClicked = False
+                azButtonClicked = False
+                afButtonClicked = False
+                oaButtonClicked = False
+            if showAnswerEU == True:
+                SAButtonClicked = False
+                naButtonClicked = False
+                EUButtonClicked = False
+                azButtonClicked = False
+                afButtonClicked = False
+                oaButtonClicked = False
+                fill(0)
+                text(EUAnswers[randEU], 850, 120, 330, 450)
+            if azButtonClicked == True:
+                fill(0)
+                text(AZQuestions[randAZ], 850, 120, 330, 450)
+                naButtonClicked = False
+                SAButtonClicked = False
+                EUButtonClicked = False
+                afButtonClicked = False
+                oaButtonClicked = False
+            if showAnswerAZ == True:
+                SAButtonClicked = False
+                naButtonClicked = False
+                EUButtonClicked = False
+                azButtonClicked = False
+                afButtonClicked = False
+                oaButtonClicked = False
+                fill(0)
+                text(AZAnswers[randAZ], 850, 120, 330, 450)
+            if afButtonClicked == True:
+                fill(0)
+                text(AFQuestions[randAF], 850, 120, 330, 450)
+                naButtonClicked = False
+                SAButtonClicked = False
+                EUButtonClicked = False
+                azButtonClicked = False
+                oaButtonClicked = False
+            if showAnswerAF == True:
+                SAButtonClicked = False
+                naButtonClicked = False
+                EUButtonClicked = False
+                azButtonClicked = False
+                afButtonClicked = False
+                oaButtonClicked = False
+                fill(0)
+                text(AFAnswers[randAF], 850, 120, 330, 450)
+            if oaButtonClicked == True:
+                fill(0)
+                text(OAQuestions[randOA], 850, 120, 330, 450)
+                naButtonClicked = False
+                SAButtonClicked = False
+                EUButtonClicked = False
+                azButtonClicked = False
+                afButtonClicked = False
+            if showAnswerOA == True:
+                SAButtonClicked = False
+                naButtonClicked = False
+                EUButtonClicked = False
+                azButtonClicked = False
+                afButtonClicked = False
+                oaButtonClicked = False
+                fill(0)
+                text(OAAnswers[randOA], 850, 120, 330, 450)
+            
+        elif PButtonClicked == True:
+            # pech kaart screen
+            background(unhex("FFFFFF"))
+            a.setVisible(False)
+            b.setVisible(False)
+            c.setVisible(False)
+            d.setVisible(False)
+            e.setVisible(False)
+            f.setVisible(False)
+            g.setVisible(True)
+            na.setVisible(False)
+            za.setVisible(False)
+            eu.setVisible(False)
+            az.setVisible(False)
+            af.setVisible(False)
+            oa.setVisible(False)
+            h.setVisible(False)
+            i.setVisible(False)
+            j.setVisible(False)
+            text(pechIndex[rand], 510, height / 2 - 60, 300, 450)
+            text(str("Pech kaart"), width/2 - 95, 90)
+            fill(unhex("FFFFF"))
+            rect(490, 120, 330, 450, 10)
+            
+        else:
+            #Main screen
+            a.setVisible(True)
+            b.setVisible(True)
+            c.setVisible(True)
+            d.setVisible(True)
+            e.setVisible(False)
+            f.setVisible(False)
+            g.setVisible(False)
+            na.setVisible(False)
+            za.setVisible(False)
+            eu.setVisible(False)
+            az.setVisible(False)
+            af.setVisible(False)
+            oa.setVisible(False)
+            h.setVisible(False)
+            i.setVisible(False)
+            j.setVisible(False)
+            if mousePressed:
+                # spel afsluiten func.
+                if isMouseWithinSpace(455, 500, 350, 125):
+                    DiceButtonPressed = False
+                if isMouseWithinSpace(1050, 30, 200, 70):
+                    exit()
+        if punten1 == 10 or punten2 == 10 or punten3 == 10 or punten4 == 10:
+            #winnaarsscherm
+            background(unhex("FFFFFF"))
+            a.setVisible(False)
+            b.setVisible(False)
+            c.setVisible(False)
+            d.setVisible(True)
+            e.setVisible(False)
+            f.setVisible(False)
+            g.setVisible(False)
+            na.setVisible(False)
+            za.setVisible(False)
+            eu.setVisible(False)
+            az.setVisible(False)
+            af.setVisible(False)
+            h.setVisible(False)
+            i.setVisible(False)
+            j.setVisible(False)
+            oa.setVisible(False)
+            if punten1 == 10:
+                text("Speler 1 heeft gewonnen!", width / 2 - 150, height / 2)
+            elif punten2 == 10:
+                text("Speler 2 heeft gewonnen!", width / 2 - 150, height / 2)
+            elif punten3 == 10:
+                text("Speler 3 heeft gewonnen!", width / 2 - 150, height / 2)
+            elif punten4 == 10:
+                text("Speler 4 heeft gewonnen!", width / 2 - 150, height / 2)
 def isMouseWithinSpace(x,y,w,h):
     #MouseClick function
     if (x < mouseX < x + w and y < mouseY < y + h):
         return True
     else:
         return False
-
+            
 def mousePressed():
     global punten1, pechIndex, rand, punten2, punten3, punten4, side, DiceButtonClicked, QButtonClicked, PButtonClicked, randNA, showAnswerEU, EUButtonClicked, randEU, showAnswerNA, showAnswerSA, randSA, SAButtonClicked, showAnswerAZ, randAZ, azButtonClicked, randAF, afButtonClicked, showAnswerAF, showAnswerOA, oaButtonClicked, randOA
     # De + buttons punten erbij
@@ -500,7 +534,12 @@ def mousePressed():
                 punten4 = punten4 - 1
                 if punten4 < 0:
                     punten4 = 0
-    global DiceButtonClicked, side, QButtonClicked, PButtonClicked, naButtonClicked
+    global DiceButtonClicked, side, QButtonClicked, PButtonClicked, naButtonClicked, ScoreBordButtonClicked
+    if ScoreBordButtonClicked == False:
+        if isMouseWithinSpace(455, 300, 350, 125):
+            ScoreBordButtonClicked = True
+        if isMouseWithinSpace(455, 450, 350, 125):
+            exit()
     if isMouseWithinSpace(455, 500, 350, 125):
         if DiceButtonClicked == True:
             side = int(random(1, 7))
