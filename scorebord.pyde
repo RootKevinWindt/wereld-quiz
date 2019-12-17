@@ -293,6 +293,11 @@ def draw():
         if naButtonClicked == True:
             fill(0)
             text(NAQuestions[randNA], 850, 120, 330, 450)
+            SAButtonClicked = False
+            EUButtonClicked = False
+            azButtonClicked = False
+            afButtonClicked = False
+            oaButtonClicked = False
         if showAnswerNA == True:
             naButtonClicked = False
             SAButtonClicked = False
@@ -305,6 +310,11 @@ def draw():
         if SAButtonClicked == True:
             fill(0)
             text(SAQuestions[randSA], 850, 120, 330, 450)
+            naButtonClicked = False
+            EUButtonClicked = False
+            azButtonClicked = False
+            afButtonClicked = False
+            oaButtonClicked = False
         if showAnswerSA == True:
             SAButtonClicked = False
             naButtonClicked = False
@@ -317,6 +327,11 @@ def draw():
         if EUButtonClicked == True:
             fill(0)
             text(EUQuestions[randEU], 850, 120, 330, 450)
+            naButtonClicked = False
+            SAButtonClicked = False
+            azButtonClicked = False
+            afButtonClicked = False
+            oaButtonClicked = False
         if showAnswerEU == True:
             SAButtonClicked = False
             naButtonClicked = False
@@ -329,6 +344,11 @@ def draw():
         if azButtonClicked == True:
             fill(0)
             text(AZQuestions[randAZ], 850, 120, 330, 450)
+            naButtonClicked = False
+            SAButtonClicked = False
+            EUButtonClicked = False
+            afButtonClicked = False
+            oaButtonClicked = False
         if showAnswerAZ == True:
             SAButtonClicked = False
             naButtonClicked = False
@@ -341,6 +361,11 @@ def draw():
         if afButtonClicked == True:
             fill(0)
             text(AFQuestions[randAF], 850, 120, 330, 450)
+            naButtonClicked = False
+            SAButtonClicked = False
+            EUButtonClicked = False
+            azButtonClicked = False
+            oaButtonClicked = False
         if showAnswerAF == True:
             SAButtonClicked = False
             naButtonClicked = False
@@ -353,6 +378,11 @@ def draw():
         if oaButtonClicked == True:
             fill(0)
             text(OAQuestions[randOA], 850, 120, 330, 450)
+            naButtonClicked = False
+            SAButtonClicked = False
+            EUButtonClicked = False
+            azButtonClicked = False
+            afButtonClicked = False
         if showAnswerOA == True:
             SAButtonClicked = False
             naButtonClicked = False
