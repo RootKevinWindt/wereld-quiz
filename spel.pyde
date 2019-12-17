@@ -211,7 +211,7 @@ def draw():
     global DiceButtonClicked, cp5, a, b, c, d, e, f, g, i, j, na, za, eu, az, af, oa, h, side, rand, naButtonClicked, SAButtonClicked, randNA, randSA, showAnswerAZ, randAZ, randAF, showAnswerAF, afButtonClicked, ScoreBordButtonClicked, mousePressed, isMouseWithinSpace
     background(unhex("FFFFFF"))
     textFont(font2)
-    text(str("Hoofdmenu"), width / 2 - 210 , 120)
+    text(str("De Grote Wereld Quiz"), width / 2 - 400 , 120)
     a.setVisible(False)
     b.setVisible(False)
     c.setVisible(False)
