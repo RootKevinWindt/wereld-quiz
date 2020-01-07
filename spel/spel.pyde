@@ -623,6 +623,12 @@ def mousePressed():
     # Globals voor overige buttons
     global startButton, startButtonClicked, quitFromGameButton, quitFromMenuButton, showAnswerButton
 
+    # Globals voor antwoord laten zien
+    global showAnswerNA, showAnswerSA, showAnswerEU, showAnswerAZ, showAnswerAF, showAnswerOA
+
+    # Globals voor random continent nummer
+    global randNA, randSA, randEU, randAZ, randAF, randOA
+
     # Overige globals
     global cp5, randPechkaart, side, pechIndex, buttonwidthCont, buttonheightCont
 
@@ -663,11 +669,11 @@ def mousePressed():
             startButtonClicked = True
         if isMouseWithinSpace(455, 450, 350, 125):
             exit()
-    if isMouseWithinSpace(455, 500, 350, 125) and not vraagButtonClicked and not pechKaartButtonClicked:
+    if isMouseWithinSpace(455, 500, 350, 125) and vraagButtonClicked == False and pechKaartButtonClicked == False:
         if diceButtonClicked == True:
             side = int(random(1, 7))
         diceButtonClicked = not diceButtonClicked
-    if isMouseWithinSpace(75, 500, 350, 125):
+    if isMouseWithinSpace(75, 500, 350, 125) and diceButtonClicked == False and pechKaartButtonClicked == False:
         vraagButtonClicked = not vraagButtonClicked
     if vraagButtonClicked:
         showAnswerNA = False
@@ -713,7 +719,7 @@ def mousePressed():
         if isMouseWithinSpace(850, 600, 330, 60) and OAButtonClicked == True:
             showAnswerOA = not showAnswerOA
 
-    if isMouseWithinSpace(835, 500, 350, 125):
+    if isMouseWithinSpace(835, 500, 350, 125) and vraagButtonClicked == False and diceButtonClicked == False:
         randPechkaart = int(random(6))
         pechKaartButtonClicked = not pechKaartButtonClicked
     else:
